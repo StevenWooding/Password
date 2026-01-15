@@ -73,6 +73,22 @@
             {
                 var sha = new Uint8Array(await crypto.subtle.digest('SHA-512',new TextEncoder().encode($('pass').value.toLowerCase()+' '+$('name').value.toLowerCase())));
                 var strong = new TextDecoder().decode(sha.map(item => {item = item & 0x7f; return item < 33 ? item + 33 : (item == 0x7F ? 126 : item) })).substring(0,16);
+                var medium = new TextDecoder().
+                    decode
+                    (
+                        sha.map
+                        (
+                            item => 
+                                {
+                                    item = item & 0x7f; // Ensure we are in the ascii range
+                                    if(item >= 0x21 && item <= 0x2F) item = 0x2D; // The dash -
+                                    if(item >= 0x3A && item <= 0x40) item = 0x40; // The at @
+                                    if(item >= 0x5B && item <= 0x60) item = 0x5F; // The underscore _
+                                    if(item >= 0x7B) item = 0x7E;
+                                    return item < 33 ? item + 33 : (item == 0x7F ? 126 : item) 
+                                }
+                        )
+                    ).substring(0,16);
                 var weak = btoa(sha).substring(0,16);
 
                 $('output_1').value = strong;
