@@ -92,9 +92,10 @@
                 var weak = btoa(sha).substring(0,16);
 
                 $('output_1').value = strong;
-                $('output_2').value = strong.substring(0,8);
-                $('output_3').value = weak;
-                $('output_4').value = weak.substring(0,8);
+                $('output_2').value = medium;
+                $('output_3').value = strong.substring(0,8);
+                $('output_4').value = weak;
+                $('output_5').value = weak.substring(0,8);
                 arr = strong = weak = sha = '';
             }
 
@@ -111,6 +112,7 @@
             <input id="output_2" onfocus="copy_to_clipboard(this.value)"/>
             <input id="output_3" onfocus="copy_to_clipboard(this.value)"/>
             <input id="output_4" onfocus="copy_to_clipboard(this.value)"/>
+            <input id="output_5" onfocus="copy_to_clipboard(this.value)"/>
         </div>
     </body>
 </html>
