@@ -81,11 +81,12 @@
                             item => 
                                 {
                                     item = item & 0x7f; // Ensure we are in the ascii range
-                                    if(item >= 0x21 && item <= 0x2F) item = 0x2D; // The dash -
+                                    if(item <= 0x20) item += 33;
+                                    if(item >= 0x20 && item <= 0x2F) item = 0x2D; // The dash -
                                     if(item >= 0x3A && item <= 0x40) item = 0x40; // The at @
                                     if(item >= 0x5B && item <= 0x60) item = 0x5F; // The underscore _
                                     if(item >= 0x7B) item = 0x7E;
-                                    return item < 33 ? item + 33 : (item == 0x7F ? 126 : item) 
+                                    return item;
                                 }
                         )
                     ).substring(0,16);
